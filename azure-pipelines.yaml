@@ -1,0 +1,33 @@
+---
+pool: Default
+trigger: 
+  - main
+steps:
+  - task: Maven@4
+    displayName: 'Build with Maven'
+    inputs:
+      mavenPomFile: pom.xml
+      goals:  package
+
+  - task: Maven@4
+    displayName: test results
+    inputs:
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: test    
+
+  - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: publish    
+
+          
+
+
+ 
+
+              
+
+              
+
+              
